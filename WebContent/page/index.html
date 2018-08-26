@@ -1,0 +1,78 @@
+<!-- 声明当前文档的类型是html5 -->
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"><!-- 页面编码 2005年以前用的比较多的是gbk，gb2312，中文编码-->
+        <!-- 声明当前网页三要素 -->
+        <title>黑客帝国文字矩阵流星雨</title>   <!-- 标题标签 -->
+        <meta name="keywords" content="关键字">  <!-- seo优化 -->
+        <meta name="description" content="描述信息">
+        
+        <!-- css样式 -->
+        <style>
+            body{margin:0; overflow:hidden}
+        </style>
+    </head>
+    
+    <body>
+         <!-- canvas 画布 -->
+         <canvas width="400" height="400" style="background:#000;" id="canvas"></canvas>
+         <embed src="Position Music - Man At Arms.mp3">
+         <script>
+             //获取画板,当前页面获取一个标签通过id的方式
+             var canvas = document.getElementById("canvas");
+             //获取画板权限
+             var ctx = canvas.getContext("2d");
+             //获取屏幕对象
+             var s = window.screen;
+             //获取屏幕大小
+             var w = s.width;
+             var h = s.height;
+             //console.log(w+"  "+h);
+             canvas.width=w;
+             canvas.height=h;
+             var fontSize = 14;
+             
+             //计算一行有多少个文字,向下取整
+             var clos = Math.floor(w/fontSize);
+             
+             var str = "ASHNFKDLOIshcnh!@#$%&*";
+             //每一个字坐标
+             var drops = [];
+             //alert(drops);
+             for(var i=0;i<clos;i++){
+            	 drops.push(0);
+             }
+             //drops.push("展耀爱白玉堂");
+            
+             //绘制文字
+             function drawString(){
+            	 //给矩形设置填充色
+            	 ctx.fillStyle = "rgba(0,0,0,0.05)";
+            	 //绘制一个矩形
+            	ctx.fillRect(0,0,w,h);
+            	ctx.font = "600 "+fontSize+"px 华文行楷";
+                 //设置文字颜色
+                ctx.fillStyle = "#0aed43";
+                 for(var i=0;i<clos;i++){
+                	 //x坐标
+                	 var x = i*fontSize;
+                	 //y坐标
+                	 var y = drops[i]*fontSize;
+                	 ctx.fillText(str[Math.floor(Math.random()*str.length)],x,y);
+                	 //math.random（）取值在0-1之间
+                	 if(y>h && Math.random()>0.99){
+                		 drops[i]=0;
+                	 }
+                	 drops[i]++;
+                 }
+                 
+             }
+             //定义一个定时器，每隔30ms执行一次
+             setInterval(drawString,30);
+             
+            
+            
+         </script>
+    </body>
+</html>
